@@ -1,597 +1,625 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dein Name — Fullstack &amp; App Developer</title>
-<meta name="description" content="Fullstack- und App-Entwickler mit Fokus auf React Native, Flutter, Python und APIs.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230D0F12'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='26' font-weight='700' fill='%23E8A33D' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
+<title>Unq0de — apps, backends &amp; the APIs that connect them</title>
+<meta name="description" content="Unq0de builds cross-platform apps in React Native and Flutter, and the Python backends and APIs behind them.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230E1116'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='30' font-weight='700' fill='%23FF6B4A' text-anchor='middle'%3EU%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #0D0F12;
-    --bg-alt: #15181D;
-    --bg-raised: #1B1F26;
-    --border: #262B33;
-    --border-soft: #1E222A;
-    --text: #E7E9EC;
-    --text-muted: #99A1AE;
-    --accent: #E8A33D;
-    --accent-dark: #0D0F12;
-    --accent-blue: #5FA8D3;
-    --accent-rose: #D97AA0;
-    --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
-    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --radius: 10px;
-    --maxw: 1080px;
+    --radius: 4px;
+    --sidebar-w: 240px;
+    --statusbar-h: 30px;
+    --tabbar-h: 42px;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  html[data-theme="dark"]{
+    --bg: #0E1116;
+    --bg-sidebar: #0B0D11;
+    --bg-raised: #161B22;
+    --bg-input: #1B222B;
+    --border: #262D38;
+    --border-soft: #1B212A;
+    --text: #D8DEE9;
+    --text-dim: #7C8798;
+    --text-faint: #4C5566;
+    --accent: #FF6B4A;
+    --accent-ink: #0E1116;
+    --accent-2: #4FD1C5;
+    --accent-3: #E3B341;
+    --danger: #F1707A;
+  }
+
+  html[data-theme="light"]{
+    --bg: #F7F5F0;
+    --bg-sidebar: #EFEBE2;
+    --bg-raised: #FFFFFF;
+    --bg-input: #FFFFFF;
+    --border: #DDD6C7;
+    --border-soft: #E6E0D2;
+    --text: #26241D;
+    --text-dim: #6B6656;
+    --text-faint: #A39C88;
+    --accent: #C2511F;
+    --accent-ink: #FFFFFF;
+    --accent-2: #147D74;
+    --accent-3: #9A6B08;
+    --danger: #B23A46;
   }
 
   *,*::before,*::after{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior: auto; }
-    *,*::before,*::after{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+    *,*::before,*::after{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   }
 
   body{
-    margin:0;
+    margin: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+    font-family: var(--body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    transition: background .25s ease, color .25s ease;
   }
-
-  /* ambient dot-grid texture */
-  body::before{
-    content:"";
-    position: fixed;
-    inset: 0;
-    background-image: radial-gradient(circle, rgba(231,233,236,0.05) 1px, transparent 1px);
-    background-size: 26px 26px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
   a{ color: inherit; }
-  h1,h2,h3{ font-family: var(--mono); font-weight: 700; margin: 0; letter-spacing: -0.01em; }
   p{ margin: 0; }
-  ::selection{ background: var(--accent); color: var(--accent-dark); }
+  ::selection{ background: var(--accent); color: var(--accent-ink); }
+  :focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  :focus-visible{
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-    border-radius: 4px;
+  h1,h2,h3{
+    font-family: var(--display);
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.01em;
   }
 
-  .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
-  .eyebrow{
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--accent-blue);
-    margin: 0 0 10px 0;
-  }
-  .tag{
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--text-muted);
-    background: var(--bg-raised);
-    border: 1px solid var(--border);
-    padding: 4px 10px;
-    border-radius: 6px;
-    display: inline-block;
+  code, .mono{ font-family: var(--mono); }
+
+  /* ============ APP SHELL ============ */
+  .shell{
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    min-height: 100vh;
   }
 
-  /* ---------- NAV ---------- */
-  header.nav{
+  /* ---------- SIDEBAR (file tree) ---------- */
+  .sidebar{
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border-soft);
+    padding: 20px 0 0;
     position: sticky;
     top: 0;
-    z-index: 20;
-    background: rgba(13,15,18,0.82);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-soft);
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
   }
-  .nav-inner{
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: 16px 24px;
+  .brand{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-  }
-  .logo{
+    gap: 9px;
+    padding: 0 18px 20px;
     font-family: var(--mono);
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--text);
-    text-decoration: none;
+    font-weight: 600;
+    font-size: 14.5px;
   }
-  .logo span{ color: var(--accent); }
-  .nav-links{
+  .brand-mark{
+    width: 20px; height: 20px;
+    border-radius: 5px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+  }
+  .tree-label{
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--text-faint);
+    padding: 4px 18px;
+    margin-top: 6px;
+  }
+  .tree{ list-style: none; margin: 0; padding: 0 10px; }
+  .tree li{ margin: 1px 0; }
+  .tree a{
     display: flex;
-    gap: 28px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    font-family: var(--mono);
-    font-size: 14px;
-  }
-  .nav-links a{
+    align-items: center;
+    gap: 8px;
     text-decoration: none;
-    color: var(--text-muted);
-    transition: color .15s ease;
-  }
-  .nav-links a:hover{ color: var(--text); }
-  .nav-cta{
     font-family: var(--mono);
     font-size: 13.5px;
-    text-decoration: none;
-    color: var(--accent-dark);
-    background: var(--accent);
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-weight: 600;
-    white-space: nowrap;
+    color: var(--text-dim);
+    padding: 6px 8px;
+    border-radius: var(--radius);
+    border-left: 2px solid transparent;
   }
-  @media (max-width: 680px){
-    .nav-links{ display:none; }
+  .tree a:hover{ color: var(--text); background: var(--bg-input); }
+  .tree a.active{
+    color: var(--text);
+    background: var(--bg-input);
+    border-left: 2px solid var(--accent);
+  }
+  .tree .ext{ color: var(--text-faint); margin-left: auto; font-size: 11.5px; }
+  .tree .icon{ width: 6px; height: 6px; border-radius: 1.5px; flex-shrink: 0; }
+  .icon-tsx{ background: var(--accent-2); }
+  .icon-json{ background: var(--accent-3); }
+  .icon-log{ background: var(--accent); }
+  .icon-md{ background: var(--text-dim); }
+  .icon-sh{ background: var(--danger); }
+
+  .sidebar-foot{
+    margin-top: auto;
+    padding: 16px 18px 20px;
+    border-top: 1px solid var(--border-soft);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--text-faint);
+  }
+  .sidebar-foot a{ color: var(--text-dim); text-decoration: none; }
+  .sidebar-foot a:hover{ color: var(--accent); }
+
+  @media (max-width: 880px){
+    .shell{ grid-template-columns: 1fr; }
+    .sidebar{
+      position: static;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--border-soft);
+      padding-top: 14px;
+    }
+    .tree{ display: flex; flex-wrap: wrap; padding: 0 12px 10px; gap: 2px; }
+    .tree li{ margin: 0; }
+    .tree-label{ display: none; }
+  }
+
+  /* ---------- MAIN ---------- */
+  .main{ display: flex; flex-direction: column; min-height: 100vh; }
+
+  .tabbar{
+    height: var(--tabbar-h);
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    overflow-x: auto;
+  }
+  .tab{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-faint);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 16px;
+    border-right: 1px solid var(--border-soft);
+    text-decoration: none;
+    white-space: nowrap;
+    background: var(--bg-sidebar);
+  }
+  .tab.active{ color: var(--text); background: var(--bg); border-bottom: 2px solid var(--accent); margin-bottom: -1px; }
+  .tab .dot{ width: 5px; height: 5px; border-radius: 50%; background: var(--text-faint); }
+  .tab.active .dot{ background: var(--accent); }
+
+  .pane{ flex: 1; padding: 0 0 60px; }
+  .frame{ max-width: 760px; padding: 64px 56px 8px; }
+  @media (max-width: 640px){ .frame{ padding: 44px 20px 8px; } }
+
+  .lineno{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-faint);
+    margin-bottom: 4px;
   }
 
   /* ---------- HERO ---------- */
-  .hero{
-    padding: 76px 0 60px;
+  .hero .frame{ padding-top: 88px; }
+  .hero h1{
+    font-size: clamp(30px, 4.4vw, 46px);
+    line-height: 1.14;
+    max-width: 620px;
   }
-  .window{
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
-    max-width: 640px;
-  }
-  .window-bar{
-    display:flex;
-    align-items:center;
-    gap: 8px;
-    padding: 11px 14px;
-    background: var(--bg-raised);
-    border-bottom: 1px solid var(--border);
-  }
-  .dot{ width: 10px; height: 10px; border-radius: 50%; opacity: 0.85; }
-  .dot-r{ background: #FF5F57; }
-  .dot-y{ background: #FEBC2E; }
-  .dot-g{ background: #28C840; }
-  .window-title{
-    margin-left: 8px;
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--text-muted);
-  }
-  .window-body{
-    padding: 20px 20px 22px;
-    font-family: var(--mono);
-    font-size: 14px;
-    min-height: 168px;
-  }
-  .terminal-line{ color: var(--text); }
-  .prompt{ color: var(--accent-blue); }
-  #typed-cmd{ color: var(--text); }
-  .cursor{
-    display: inline-block;
-    color: var(--accent);
-    animation: blink 1s steps(1) infinite;
-  }
-  @keyframes blink{ 50%{ opacity: 0; } }
-  .json-output{
-    margin: 12px 0 0 0;
-    color: var(--text-muted);
-    white-space: pre-wrap;
-    font-size: 13.5px;
-    line-height: 1.7;
-  }
-  .json-output .key{ color: var(--accent-blue); }
-  .json-output .str{ color: var(--accent); }
-  .json-output .punc{ color: var(--text-muted); }
-  .json-output .arr{ color: var(--accent-rose); }
-
-  .hero-thesis{
-    max-width: 720px;
-    margin-top: 40px;
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity .6s ease, transform .6s ease;
-  }
-  .hero-thesis.revealed{ opacity: 1; transform: translateY(0); }
-  .hero-thesis h1{
-    font-size: clamp(28px, 4.6vw, 44px);
-    line-height: 1.18;
-  }
-  .hero-thesis h1 .accent{ color: var(--accent); }
+  .hero h1 .accent{ color: var(--accent); }
   .hero-sub{
-    font-size: 17px;
-    color: var(--text-muted);
-    max-width: 560px;
-    margin-top: 16px;
+    margin-top: 20px;
+    color: var(--text-dim);
+    font-size: 16.5px;
+    max-width: 520px;
   }
   .hero-sub strong{ color: var(--text); font-weight: 600; }
-
-  .status-pill{
+  .hero-meta{
+    display: flex;
+    gap: 22px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-faint);
+  }
+  .hero-meta span b{ color: var(--text-dim); font-weight: 500; }
+  .hero-cta{ display: flex; gap: 12px; margin-top: 34px; flex-wrap: wrap; }
+  .btn{
+    font-family: var(--mono);
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 10px 18px;
+    border-radius: var(--radius);
+    text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--text-muted);
-    margin-top: 18px;
-    border: 1px solid var(--border);
-    padding: 6px 12px;
-    border-radius: 100px;
+    transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    border: 1px solid transparent;
   }
-  .status-dot{
-    width: 7px; height: 7px; border-radius: 50%;
-    background: #28C840;
-    box-shadow: 0 0 0 3px rgba(40,200,64,0.15);
-  }
-
-  .hero-cta{ display:flex; gap: 14px; margin-top: 28px; flex-wrap: wrap; }
-  .btn{
-    font-family: var(--sans);
-    font-weight: 600;
-    font-size: 14.5px;
-    padding: 12px 20px;
-    border-radius: 7px;
-    text-decoration: none;
-    display: inline-block;
-    transition: transform .15s ease, border-color .15s ease, background .15s ease;
-  }
-  .btn-primary{ background: var(--accent); color: var(--accent-dark); }
+  .btn-primary{ background: var(--accent); color: var(--accent-ink); }
   .btn-primary:hover{ transform: translateY(-1px); }
-  .btn-ghost{ border: 1px solid var(--border); color: var(--text); }
-  .btn-ghost:hover{ border-color: var(--accent-blue); color: var(--accent-blue); }
+  .btn-ghost{ border-color: var(--border); color: var(--text); }
+  .btn-ghost:hover{ border-color: var(--accent-2); color: var(--accent-2); }
 
-  /* ---------- SECTION GENERIC ---------- */
-  .section{ padding: 88px 0; border-top: 1px solid var(--border-soft); }
-  .section h2{ font-size: clamp(22px, 3vw, 30px); margin-bottom: 36px; }
-  .reveal{
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity .55s ease, transform .55s ease;
-  }
+  /* ---------- SECTION generic ---------- */
+  .section{ border-top: 1px solid var(--border-soft); }
+  .section-head{ display: flex; align-items: baseline; gap: 12px; margin-bottom: 30px; }
+  .section-head h2{ font-size: 22px; }
+  .section-head .path{ font-family: var(--mono); font-size: 12px; color: var(--text-faint); }
+  .reveal{ opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
   .reveal.in-view{ opacity: 1; transform: translateY(0); }
 
-  /* ---------- STACK ---------- */
-  .tree{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-  }
-  @media (max-width: 640px){ .tree{ grid-template-columns: 1fr; } }
-  .tree-group{
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    background: var(--bg-alt);
-  }
-  .tree-folder{
-    font-family: var(--mono);
-    font-size: 14px;
-    color: var(--accent-blue);
-    margin: 0 0 14px 0;
-  }
-  .tree-folder .slash{ color: var(--text-muted); }
-  .tree-items{ display:flex; flex-wrap: wrap; gap: 8px; }
-
-  /* ---------- PROJECTS ---------- */
-  .commit-list{ display:flex; flex-direction: column; gap: 16px; }
-  .commit-card{
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 22px 24px;
-    background: var(--bg-alt);
-    transition: border-color .15s ease, transform .15s ease;
-  }
-  .commit-card:hover{ border-color: var(--accent-blue); transform: translateY(-2px); }
-  .commit-meta{
-    display:flex; align-items:center; gap: 10px;
-    font-family: var(--mono); font-size: 12.5px; color: var(--text-muted);
-    margin-bottom: 10px;
-  }
-  .commit-hash{ color: var(--accent-rose); }
-  .commit-card h3{
-    font-family: var(--sans);
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .commit-card p{ color: var(--text-muted); font-size: 15px; }
-  .commit-tags{ display:flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-  .commit-links{ display:flex; gap: 18px; margin-top: 16px; }
-  .commit-links a{
+  /* ---------- STACK (package.json style) ---------- */
+  .pkg{
     font-family: var(--mono);
     font-size: 13.5px;
-    text-decoration: none;
-    color: var(--accent);
-  }
-  .commit-links a:hover{ color: var(--accent-blue); }
-
-  /* ---------- ABOUT / README ---------- */
-  .readme{
+    background: var(--bg-raised);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    overflow: hidden;
-    max-width: 760px;
+    padding: 20px 22px;
+    color: var(--text-dim);
+    line-height: 1.9;
   }
-  .readme-tab{
+  .pkg .k{ color: var(--accent-2); }
+  .pkg .s{ color: var(--accent-3); }
+  .pkg .punc{ color: var(--text-faint); }
+  .pkg-group{ margin-top: 10px; }
+  .pkg-group:first-child{ margin-top: 0; }
+
+  /* ---------- PROJECTS (git log) ---------- */
+  .log{ display: flex; flex-direction: column; }
+  .commit{
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .commit:first-child{ padding-top: 0; }
+  .commit-hash{
     font-family: var(--mono);
     font-size: 12.5px;
-    color: var(--text-muted);
-    background: var(--bg-raised);
-    border-bottom: 1px solid var(--border);
-    padding: 10px 16px;
+    color: var(--accent);
+    padding-top: 3px;
   }
-  .readme-body{ padding: 26px 26px 28px; background: var(--bg-alt); }
-  .readme-body p{ color: var(--text-muted); font-size: 15.5px; margin-bottom: 14px; }
-  .readme-body p:last-child{ margin-bottom: 0; }
-  .readme-body strong{ color: var(--text); }
+  .commit-body h3{ font-size: 17px; margin-bottom: 6px; }
+  .commit-body p{ color: var(--text-dim); font-size: 14.5px; max-width: 480px; }
+  .commit-diff{
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    color: var(--text-faint);
+  }
+  .commit-diff .add{ color: var(--accent-2); }
+  .commit-links{ margin-top: 12px; display: flex; gap: 16px; }
+  .commit-links a{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    text-decoration: none;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+  }
+  .commit-links a:hover{ color: var(--accent); border-color: var(--accent); }
+
+  /* ---------- ABOUT (markdown) ---------- */
+  .md p{ color: var(--text-dim); font-size: 15.5px; margin-bottom: 16px; max-width: 560px; }
+  .md p:last-child{ margin-bottom: 0; }
+  .md strong{ color: var(--text); font-weight: 600; }
+  .md .heading{ font-family: var(--mono); color: var(--text-faint); font-size: 13px; margin-bottom: 6px; }
 
   /* ---------- CONTACT ---------- */
-  .contact-inner{ max-width: 620px; }
-  .contact-inner p{ color: var(--text-muted); font-size: 16px; margin-top: 14px; }
-  .contact-actions{ display:flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
-
-  /* ---------- FOOTER ---------- */
-  footer{
-    border-top: 1px solid var(--border-soft);
-    padding: 28px 0 40px;
+  .contact-cmd{
+    font-family: var(--mono);
+    font-size: 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    color: var(--text-dim);
+    max-width: 560px;
   }
-  .footer-inner{
-    display:flex; justify-content: space-between; align-items:center; flex-wrap: wrap; gap: 10px;
-    font-family: var(--mono); font-size: 12.5px; color: var(--text-muted);
+  .contact-cmd .prompt{ color: var(--accent-2); }
+  .contact-cmd .str{ color: var(--accent-3); }
+  .contact-actions{ display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+
+  /* ---------- STATUS BAR ---------- */
+  .statusbar{
+    position: sticky;
+    bottom: 0;
+    height: var(--statusbar-h);
+    background: var(--accent);
+    color: var(--accent-ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    z-index: 10;
+  }
+  .statusbar-left, .statusbar-right{ display: flex; align-items: center; gap: 16px; }
+  .status-item{ display: flex; align-items: center; gap: 5px; opacity: .95; }
+
+  .theme-switch{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    color: var(--accent-ink);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    cursor: pointer;
+    padding: 0;
+  }
+  .theme-track{
+    width: 30px; height: 15px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.25);
+    position: relative;
+    flex-shrink: 0;
+  }
+  html[data-theme="light"] .theme-track{ background: rgba(255,255,255,0.4); }
+  .theme-thumb{
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--accent-ink);
+    transition: left .18s ease;
+  }
+  html[data-theme="light"] .theme-thumb{ left: 17px; }
+
+  @media (max-width: 640px){
+    .statusbar-left .status-item:not(:first-child){ display: none; }
   }
 </style>
 </head>
 <body>
 
-<header class="nav">
-  <div class="nav-inner">
-    <a href="#" class="logo">~/<span>dein-name</span></a>
-    <ul class="nav-links">
-      <li><a href="#stack">Stack</a></li>
-      <li><a href="#projekte">Projekte</a></li>
-      <li><a href="#ueber">Über mich</a></li>
+<div class="shell">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">U</span> unq0de</div>
+
+    <p class="tree-label">workspace</p>
+    <ul class="tree">
+      <li><a href="#hero" class="active" data-tab="hero"><span class="icon icon-tsx"></span>index<span class="ext">.tsx</span></a></li>
+      <li><a href="#stack" data-tab="stack"><span class="icon icon-json"></span>stack<span class="ext">.json</span></a></li>
+      <li><a href="#projects" data-tab="projects"><span class="icon icon-log"></span>projects<span class="ext">.log</span></a></li>
+      <li><a href="#about" data-tab="about"><span class="icon icon-md"></span>about<span class="ext">.md</span></a></li>
+      <li><a href="#contact" data-tab="contact"><span class="icon icon-sh"></span>contact<span class="ext">.sh</span></a></li>
     </ul>
-    <a href="#kontakt" class="nav-cta">Kontakt</a>
+
+    <div class="sidebar-foot">
+      <div>branch: main</div>
+      <div style="margin-top:4px;"><a href="https://github.com/Unq0de" target="_blank" rel="noopener">github.com/Unq0de</a></div>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main">
+
+    <nav class="tabbar">
+      <a href="#hero" class="tab active" data-tab="hero"><span class="dot"></span>index.tsx</a>
+      <a href="#stack" class="tab" data-tab="stack"><span class="dot"></span>stack.json</a>
+      <a href="#projects" class="tab" data-tab="projects"><span class="dot"></span>projects.log</a>
+      <a href="#about" class="tab" data-tab="about"><span class="dot"></span>about.md</a>
+      <a href="#contact" class="tab" data-tab="contact"><span class="dot"></span>contact.sh</a>
+    </nav>
+
+    <main class="pane">
+
+      <!-- ============ HERO ============ -->
+      <section id="hero" class="hero">
+        <div class="frame">
+          <p class="lineno">01</p>
+          <h1>Apps and backends that <span class="accent">quietly do their job.</span></h1>
+          <p class="hero-sub">I'm <strong>Unq0de</strong> — I build cross-platform apps with React Native and Flutter, and the Python backends and APIs that keep them running. No bloat, no unnecessary abstractions, just software that holds up.</p>
+          <div class="hero-meta">
+            <span>role: <b>fullstack &amp; app developer</b></span>
+            <span>focus: <b>mobile, apis, python</b></span>
+            <span>status: <b>open to new projects</b></span>
+          </div>
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary">See the work →</a>
+            <a href="#contact" class="btn btn-ghost">Get in touch</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ STACK ============ -->
+      <section id="stack" class="section reveal">
+        <div class="frame">
+          <p class="lineno">02</p>
+          <div class="section-head"><h2>What I build with</h2><span class="path">~/stack.json</span></div>
+          <div class="pkg">
+            <div class="pkg-group"><span class="k">"mobile"</span><span class="punc">:</span> [<span class="s">"React Native"</span>, <span class="s">"Flutter"</span>, <span class="s">"Dart"</span>, <span class="s">"TypeScript"</span>]<span class="punc">,</span></div>
+            <div class="pkg-group"><span class="k">"web"</span><span class="punc">:</span> [<span class="s">"React"</span>, <span class="s">"TypeScript"</span>, <span class="s">"Vite"</span>, <span class="s">"Tailwind"</span>]<span class="punc">,</span></div>
+            <div class="pkg-group"><span class="k">"backend"</span><span class="punc">:</span> [<span class="s">"Python"</span>, <span class="s">"FastAPI"</span>, <span class="s">"REST APIs"</span>, <span class="s">"PostgreSQL"</span>]<span class="punc">,</span></div>
+            <div class="pkg-group"><span class="k">"tooling"</span><span class="punc">:</span> [<span class="s">"Docker"</span>, <span class="s">"Git"</span>, <span class="s">"CI/CD"</span>, <span class="s">"Linux"</span>]</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PROJECTS ============ -->
+      <section id="projects" class="section reveal">
+        <div class="frame">
+          <p class="lineno">03</p>
+          <div class="section-head"><h2>Selected work</h2><span class="path">~/projects.log</span></div>
+          <div class="log">
+            <article class="commit">
+              <div class="commit-hash">a3f9c1d</div>
+              <div class="commit-body">
+                <!-- TODO: replace with a real project -->
+                <h3>Project name — cross-platform app</h3>
+                <p>What it does, who it's for, and what part you built. Two or three sentences of substance beat a paragraph of buzzwords.</p>
+                <div class="commit-diff"><span class="add">+ React Native</span> · <span class="add">+ Node.js</span> · <span class="add">+ Push notifications</span></div>
+                <div class="commit-links"><a href="#">source</a><a href="#">live</a></div>
+              </div>
+            </article>
+            <article class="commit">
+              <div class="commit-hash">7e21bb4</div>
+              <div class="commit-body">
+                <h3>Project name — Flutter app</h3>
+                <p>What it does, who it's for, and what part you built.</p>
+                <div class="commit-diff"><span class="add">+ Flutter</span> · <span class="add">+ Firebase</span> · <span class="add">+ Offline sync</span></div>
+                <div class="commit-links"><a href="#">source</a><a href="#">live</a></div>
+              </div>
+            </article>
+            <article class="commit">
+              <div class="commit-hash">12d4f80</div>
+              <div class="commit-body">
+                <h3>Project name — REST API &amp; backend</h3>
+                <p>What the system does, what scale or integration it was built for.</p>
+                <div class="commit-diff"><span class="add">+ Python</span> · <span class="add">+ FastAPI</span> · <span class="add">+ Docker</span></div>
+                <div class="commit-links"><a href="#">source</a><a href="#">docs</a></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ABOUT ============ -->
+      <section id="about" class="section reveal">
+        <div class="frame">
+          <p class="lineno">04</p>
+          <div class="section-head"><h2>About</h2><span class="path">~/about.md</span></div>
+          <div class="md">
+            <p class="heading">## who</p>
+            <p>I build the apps people use and the systems behind them — React Native and Flutter on the front, Python and REST APIs on the back. I like owning a feature end to end, from the screen someone taps to the database row it writes.</p>
+            <p class="heading">## how</p>
+            <p>Software should feel obvious to use and stay boring to maintain. I'd rather ship something small and solid than something large and fragile, and I read my own code again a week later to make sure it still makes sense.</p>
+            <p class="heading">## why</p>
+            <p>Because building is the fun part — sketching an idea, watching it run, and fixing the thing that breaks at 1am. <strong>That part hasn't gotten old yet.</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CONTACT ============ -->
+      <section id="contact" class="section reveal">
+        <div class="frame">
+          <p class="lineno">05</p>
+          <div class="section-head"><h2>Let's build something</h2><span class="path">~/contact.sh</span></div>
+          <p style="color:var(--text-dim); font-size:15.5px; max-width:520px;">Got an app, an API, or a backend that needs building? Send a message — no forms, just an inbox.</p>
+          <div class="contact-cmd" style="margin-top:18px;"><span class="prompt">$</span> mail --to <span class="str">contact@jbre.dev</span> --subject <span class="str">"let's talk"</span></div>
+          <div class="contact-actions">
+            <a href="mailto:contact@jbre.dev" class="btn btn-primary">Email me</a>
+            <a href="https://github.com/Unq0de" class="btn btn-ghost" target="_blank" rel="noopener">GitHub →</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ============ STATUS BAR ============ -->
+    <div class="statusbar">
+      <div class="statusbar-left">
+        <span class="status-item">⎇ main</span>
+        <span class="status-item">UTF-8</span>
+        <span class="status-item">TypeScript</span>
+      </div>
+      <div class="statusbar-right">
+        <span class="status-item" id="year-status"></span>
+        <button class="theme-switch" id="theme-toggle" aria-label="Toggle light and dark theme">
+          <span id="theme-label">dark</span>
+          <span class="theme-track"><span class="theme-thumb"></span></span>
+        </button>
+      </div>
+    </div>
+
   </div>
-</header>
-
-<main>
-  <!-- ================= HERO ================= -->
-  <section class="hero wrap">
-    <div class="window">
-      <div class="window-bar">
-        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-        <span class="window-title">me.sh</span>
-      </div>
-      <div class="window-body">
-        <p class="terminal-line"><span class="prompt">$</span> <span id="typed-cmd"></span><span class="cursor" id="cursor">▌</span></p>
-        <pre class="json-output" id="typed-json"></pre>
-      </div>
-    </div>
-
-    <div class="hero-thesis" id="hero-thesis">
-      <h1>Apps, APIs &amp; Backends,<br><span class="accent">die einfach funktionieren.</span></h1>
-      <p class="hero-sub">Ich bin <strong><!-- TODO: Name eintragen -->Dein Name</strong> — Entwickler für React Native, Flutter, Python und alles, was dazwischen liegt. Von der ersten Idee bis zur produktiven API.</p>
-      <span class="status-pill"><span class="status-dot"></span>Offen für neue Projekte</span>
-      <div class="hero-cta">
-        <a href="#projekte" class="btn btn-primary">Projekte ansehen</a>
-        <a href="#kontakt" class="btn btn-ghost">Kontakt aufnehmen</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= STACK ================= -->
-  <section id="stack" class="section wrap">
-    <p class="eyebrow reveal">// stack</p>
-    <h2 class="reveal">Womit ich arbeite</h2>
-    <div class="tree reveal">
-      <div class="tree-group">
-        <p class="tree-folder">mobile<span class="slash">/</span></p>
-        <div class="tree-items">
-          <span class="tag">React Native</span>
-          <span class="tag">Flutter</span>
-          <span class="tag">Dart</span>
-          <span class="tag">TypeScript</span>
-        </div>
-      </div>
-      <div class="tree-group">
-        <p class="tree-folder">frontend<span class="slash">/</span></p>
-        <div class="tree-items">
-          <span class="tag">React</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">Tailwind</span>
-          <span class="tag">Vite</span>
-        </div>
-      </div>
-      <div class="tree-group">
-        <p class="tree-folder">backend + apis<span class="slash">/</span></p>
-        <div class="tree-items">
-          <span class="tag">Python</span>
-          <span class="tag">FastAPI</span>
-          <span class="tag">REST</span>
-          <span class="tag">PostgreSQL</span>
-        </div>
-      </div>
-      <div class="tree-group">
-        <p class="tree-folder">tooling<span class="slash">/</span></p>
-        <div class="tree-items">
-          <span class="tag">Docker</span>
-          <span class="tag">Git</span>
-          <span class="tag">CI/CD</span>
-          <span class="tag">Linux</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= PROJECTS ================= -->
-  <section id="projekte" class="section wrap">
-    <p class="eyebrow reveal">// projekte</p>
-    <h2 class="reveal">Ausgewählte Arbeiten</h2>
-    <div class="commit-list">
-      <article class="commit-card reveal">
-        <div class="commit-meta"><span class="commit-hash">#a3f9c1d</span><span>2026</span></div>
-        <!-- TODO: echtes Projekt eintragen -->
-        <h3>Projektname — Cross-Platform App</h3>
-        <p>Kurze Beschreibung: Welches Problem löst die App, für wen, und was war deine Rolle dabei. Zwei bis drei Sätze reichen.</p>
-        <div class="commit-tags">
-          <span class="tag">React Native</span>
-          <span class="tag">Node.js</span>
-        </div>
-        <div class="commit-links">
-          <a href="#">Code →</a>
-          <a href="#">Live →</a>
-        </div>
-      </article>
-
-      <article class="commit-card reveal">
-        <div class="commit-meta"><span class="commit-hash">#7e21bb4</span><span>2025</span></div>
-        <h3>Projektname — Flutter App</h3>
-        <p>Kurze Beschreibung: Welches Problem löst die App, für wen, und was war deine Rolle dabei.</p>
-        <div class="commit-tags">
-          <span class="tag">Flutter</span>
-          <span class="tag">Firebase</span>
-        </div>
-        <div class="commit-links">
-          <a href="#">Code →</a>
-          <a href="#">Live →</a>
-        </div>
-      </article>
-
-      <article class="commit-card reveal">
-        <div class="commit-meta"><span class="commit-hash">#12d4f80</span><span>2025</span></div>
-        <h3>Projektname — REST API &amp; Backend</h3>
-        <p>Kurze Beschreibung: Welches System steckt dahinter, welche Skalierung / Integration war gefragt.</p>
-        <div class="commit-tags">
-          <span class="tag">Python</span>
-          <span class="tag">FastAPI</span>
-          <span class="tag">Docker</span>
-        </div>
-        <div class="commit-links">
-          <a href="#">Code →</a>
-          <a href="#">Docs →</a>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- ================= ABOUT ================= -->
-  <section id="ueber" class="section wrap">
-    <p class="eyebrow reveal">// über mich</p>
-    <h2 class="reveal">README.md</h2>
-    <div class="readme reveal">
-      <div class="readme-tab">README.md</div>
-      <div class="readme-body">
-        <p><strong>Wer ich bin:</strong> Ich entwickle Apps, Web-Anwendungen und die APIs, die sie am Laufen halten — von React Native und Flutter im Frontend bis zu Python-Backends und eigenen Schnittstellen.</p>
-        <p><strong>Wie ich arbeite:</strong> Mir ist wichtig, dass Software sich intuitiv anfühlt und im Code genauso sauber aufgebaut ist wie im Interface. Ich denke Produkte gerne von der Nutzung her, nicht nur von der Technik.</p>
-        <p><strong>Warum ich das mache:</strong> Weil mich das Bauen selbst reizt — von der ersten Skizze bis zum laufenden System in Produktion.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= CONTACT ================= -->
-  <section id="kontakt" class="section wrap">
-    <div class="contact-inner">
-      <p class="eyebrow reveal">// kontakt</p>
-      <h2 class="reveal">Lass uns etwas bauen.</h2>
-      <p class="reveal">Du hast eine Idee, ein Projekt oder brauchst Unterstützung bei App, Backend oder API? Schreib mir einfach.</p>
-      <div class="contact-actions reveal">
-        <!-- TODO: E-Mail-Adresse eintragen -->
-        <a href="mailto:deine@email.de" class="btn btn-primary">E-Mail schreiben</a>
-        <!-- TODO: GitHub-Username eintragen -->
-        <a href="https://github.com/dein-username" class="btn btn-ghost" target="_blank" rel="noopener">GitHub →</a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="wrap footer-inner">
-    <span>© <span id="year"></span> Dein Name</span>
-    <span>gebaut mit HTML, CSS &amp; etwas Kaffee</span>
-  </div>
-</footer>
+</div>
 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('year-status').textContent = '© ' + new Date().getFullYear();
 
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ---- theme toggle ---- */
+  var root = document.documentElement;
+  var toggle = document.getElementById('theme-toggle');
+  var label = document.getElementById('theme-label');
 
-  // ---- Terminal typing sequence ----
-  var cmdEl = document.getElementById('typed-cmd');
-  var jsonEl = document.getElementById('typed-json');
-  var cursorEl = document.getElementById('cursor');
-  var thesisEl = document.getElementById('hero-thesis');
-
-  var command = 'whoami --as-json';
-  var jsonLines = [
-    '{',
-    '  <span class="key">"role"</span>: <span class="str">"Fullstack & App Developer"</span>,',
-    '  <span class="key">"stack"</span>: [<span class="arr">"React Native"</span>, <span class="arr">"Flutter"</span>, <span class="arr">"Python"</span>],',
-    '  <span class="key">"builds"</span>: <span class="str">"apps, apis, backends"</span>,',
-    '  <span class="key">"available"</span>: <span class="str">true</span>',
-    '}'
-  ];
-
-  function revealThesis(){
-    thesisEl.classList.add('revealed');
+  function applyTheme(t){
+    root.setAttribute('data-theme', t);
+    label.textContent = t;
+    try{ localStorage.setItem('unq0de-theme', t); }catch(e){}
   }
 
-  if (reduceMotion) {
-    cmdEl.textContent = command;
-    jsonEl.innerHTML = jsonLines.join('\n');
-    cursorEl.style.display = 'none';
-    revealThesis();
-  } else {
-    var i = 0;
-    function typeCmd(){
-      if (i <= command.length) {
-        cmdEl.textContent = command.slice(0, i);
-        i++;
-        setTimeout(typeCmd, 38);
-      } else {
-        setTimeout(typeJson, 250);
-      }
-    }
-    var lineIndex = 0;
-    function typeJson(){
-      if (lineIndex < jsonLines.length) {
-        jsonEl.innerHTML += (lineIndex > 0 ? '\n' : '') + jsonLines[lineIndex];
-        lineIndex++;
-        setTimeout(typeJson, 110);
-      } else {
-        setTimeout(revealThesis, 200);
-      }
-    }
-    setTimeout(typeCmd, 400);
+  (function initTheme(){
+    var saved = null;
+    try{ saved = localStorage.getItem('unq0de-theme'); }catch(e){}
+    if (saved) { applyTheme(saved); return; }
+    var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    applyTheme(prefersLight ? 'light' : 'dark');
+  })();
+
+  toggle.addEventListener('click', function(){
+    var current = root.getAttribute('data-theme');
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  });
+
+  /* ---- active tab / tree link on scroll ---- */
+  var sections = document.querySelectorAll('.pane > section[id]');
+  var tabs = document.querySelectorAll('.tab');
+  var treeLinks = document.querySelectorAll('.tree a');
+
+  function setActive(id){
+    tabs.forEach(function(t){ t.classList.toggle('active', t.dataset.tab === id); });
+    treeLinks.forEach(function(t){ t.classList.toggle('active', t.dataset.tab === id); });
   }
 
-  // ---- Scroll reveal ----
-  var revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && !reduceMotion) {
+  if ('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          io.unobserve(entry.target);
+        if (entry.isIntersecting){
+          setActive(entry.target.id);
+          if (entry.target.classList.contains('reveal')) entry.target.classList.add('in-view');
         }
       });
-    }, { threshold: 0.15 });
-    revealEls.forEach(function(el){ io.observe(el); });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+    sections.forEach(function(s){ io.observe(s); });
+
+    var revealEls = document.querySelectorAll('.reveal');
+    var revealIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){ entry.target.classList.add('in-view'); revealIo.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(function(el){ revealIo.observe(el); });
   } else {
-    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in-view'); });
   }
 </script>
 
