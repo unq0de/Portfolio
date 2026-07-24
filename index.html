@@ -503,7 +503,7 @@
         <p class="tree-folder">backend + apis<span class="slash">/</span></p>
         <div class="tree-items">
           <button class="tag" data-tech="python" type="button">Python</button>
-          <button class="tag" data-tech="fastapi" type="button">FastAPI</button>
+          <button class="tag" data-tech="django" type="button">Django</button>
           <button class="tag" data-tech="rest" type="button">REST</button>
           <button class="tag" data-tech="postgresql" type="button">PostgreSQL</button>
         </div>
@@ -536,44 +536,31 @@
     <h2 class="reveal">Selected work</h2>
     <div class="commit-list">
       <article class="commit-card reveal">
-        <div class="commit-meta"><span class="commit-hash">#a3f9c1d</span><span>2026</span></div>
-        <!-- TODO: replace with a real project -->
-        <h3>Project name — cross-platform app</h3>
-        <p>Short version: what problem it solves, who it's for, and what your role was. Two or three sentences is enough.</p>
-        <p class="commit-more" id="more-1">Role: solo developer, planning through release on both app stores. The interesting part was building an offline-first sync layer that never lost a user's data, even on flaky connections.</p>
+        <div class="commit-meta"><span class="commit-hash">#d41af92</span><span>2026</span></div>
+        <h3>Statement AI — bank statement API</h3>
+        <p>A REST API that reads bank statement PDFs and turns them into structured, categorized transactions instead of manual bookkeeping. Google Gemini extracts and categorizes every line item, then writes a plain-language summary of the month. Solo project, built with GDPR data export and account erasure from day one.</p>
+        <p class="commit-more" id="more-1">JWT auth with per-user data isolation, a scheduled retention-cleanup job, and a project-wide exception handler so every failure — from an expired token to a broken PDF — comes back as a clean, consistent error instead of a stack trace.</p>
         <button class="expand-btn" data-target="more-1" type="button" aria-expanded="false">+ details</button>
         <div class="commit-tags">
-          <span class="tag" data-tech="react native">React Native</span>
-          <span class="tag" data-tech="node.js">Node.js</span>
-        </div>
-        <div class="commit-links"><a href="#">Code →</a><a href="#">Live →</a></div>
-      </article>
-
-      <article class="commit-card reveal">
-        <div class="commit-meta"><span class="commit-hash">#7e21bb4</span><span>2025</span></div>
-        <h3>Project name — Flutter app</h3>
-        <p>Short version: what problem it solves, who it's for, and what your role was.</p>
-        <p class="commit-more" id="more-2">Built as a single Flutter codebase for iOS and Android, with a shared design system so both platforms stayed visually consistent without duplicating work.</p>
-        <button class="expand-btn" data-target="more-2" type="button" aria-expanded="false">+ details</button>
-        <div class="commit-tags">
-          <span class="tag" data-tech="flutter">Flutter</span>
-          <span class="tag" data-tech="firebase">Firebase</span>
-        </div>
-        <div class="commit-links"><a href="#">Code →</a><a href="#">Live →</a></div>
-      </article>
-
-      <article class="commit-card reveal">
-        <div class="commit-meta"><span class="commit-hash">#12d4f80</span><span>2025</span></div>
-        <h3>Project name — REST API &amp; backend</h3>
-        <p>Short version: what the system does behind the scenes, what scale or integration it needed.</p>
-        <p class="commit-more" id="more-3">Designed the schema and endpoints from scratch, containerized for easy deployment, with a test suite that catches breaking changes before they ship.</p>
-        <button class="expand-btn" data-target="more-3" type="button" aria-expanded="false">+ details</button>
-        <div class="commit-tags">
           <span class="tag" data-tech="python">Python</span>
-          <span class="tag" data-tech="fastapi">FastAPI</span>
+          <span class="tag" data-tech="django">Django</span>
+          <span class="tag" data-tech="postgresql">PostgreSQL</span>
           <span class="tag" data-tech="docker">Docker</span>
         </div>
-        <div class="commit-links"><a href="#">Code →</a><a href="#">Docs →</a></div>
+        <div class="commit-links"><a href="https://github.com/unq0de/statement_ai" target="_blank" rel="noopener">Code →</a><a href="https://github.com/unq0de/statement_ai#api-reference" target="_blank" rel="noopener">Docs →</a></div>
+      </article>
+
+      <article class="commit-card reveal">
+        <div class="commit-meta"><span class="commit-hash">#9c72e04</span><span>2026</span></div>
+        <h3>Linux Cheat Sheet — interactive reference</h3>
+        <p>A single-file Linux/Bash command reference, built as the page I actually reach for instead of googling the same commands again. Covers everything from permissions and processes to systemd and troubleshooting, organized so you can scan it fast under pressure.</p>
+        <p class="commit-more" id="more-2">Includes a chmod octal calculator, a kill-signals table, a troubleshooting matrix mapped to diagnostic commands, and a checklist to track what you've actually internalized versus just looked up once.</p>
+        <button class="expand-btn" data-target="more-2" type="button" aria-expanded="false">+ details</button>
+        <div class="commit-tags">
+          <span class="tag" data-tech="linux">Linux</span>
+          <span class="tag" data-tech="bash">Bash</span>
+        </div>
+        <div class="commit-links"><a href="https://github.com/unq0de/linux-cheatsheet" target="_blank" rel="noopener">Code →</a></div>
       </article>
     </div>
   </section>
@@ -601,7 +588,7 @@
 
         <p class="md-heading">## off the clock</p>
         <!-- TODO: swap in something real about you -->
-        <p>Usually the one still debugging at midnight because it's "just one more fix."</p>
+        <p>Mostly writing code, occasionally touching grass.</p>
       </div>
       <div class="file-meta" id="file-meta"></div>
     </div>
@@ -845,7 +832,7 @@
 
   /* ---------- FOOTER ROTATING STATUS ---------- */
   var statusEl = document.getElementById('footer-status');
-  var phrases = ['Open to new projects', 'Currently shipping a Flutter app', 'Runs on coffee and curiosity', 'Always up for talking APIs'];
+  var phrases = ['Open to new projects', 'Probably knee-deep in an API right now', 'Down for a good tech chat', 'Slowly turning ideas into repos'];
   var pIndex = 0;
   if (!reduceMotion) {
     setInterval(function(){
